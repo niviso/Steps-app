@@ -18,14 +18,17 @@ export default function App() {
   },5000);
   return (
     <SafeAreaView style={styles.container}>
+    <View style={{...styles.headingbox}}>
+    <Text style={styles.heading}>Make a sourdought</Text>
+    </View>
       <View style={{...styles.active,...styles.box}}>
-      <Text style={styles.text}>Fold dought</Text>
+      <Text style={styles.text}>Step 1</Text>
       </View>
       <View style={styles.box2}>
-      <Text style={styles.text}>Open up App.js to start working on your app!</Text>
+      <Text style={styles.text}>Step 2</Text>
       </View>
       <View style={styles.box}>
-      <Text style={styles.text}>Open up App.js to start working on your app!</Text>
+      <Text style={styles.text}>Step </Text>
       </View>
     </SafeAreaView>
   );

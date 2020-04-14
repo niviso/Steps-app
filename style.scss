@@ -11,26 +11,51 @@
   font-size: 18px;
 }
 
+.heading{
+  font-size: 22px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: purple;
+  text-shadow: 0px 0px 5px purple;
+
+
+}
+.headingbox{
+  width: 100%;
+  background: rgba(0,0,0,0);
+  padding: 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom-width: 4px;
+  border-bottom-color: rgba(0,0,0,0.8);
+
+}
 .box{
   width: 100%;
-  background: rgba(0,0,0,0.2);
+  background: rgba(0,0,0,0.1);
   padding: 50px;
-  border-bottom-width: 3px;
+  border-bottom-width: 2px;
   border-bottom-color: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
 
 }
 
 .box2{
   width: 100%;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0,0,0,0.3);
   padding: 50px;
-  border-bottom-width: 3px;
+  border-bottom-width: 2px;
   border-bottom-color: rgba(0,0,0,0.5);
-
+  display: flex;
+  align-items: center;
 }
 
 .active{
   border-left-width: 15px;
   border-left-color: green;
   border-left-style: solid;
+  display: flex;
+  align-items: center;
 }
