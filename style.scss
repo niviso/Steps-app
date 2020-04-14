@@ -1,0 +1,36 @@
+.container{
+  background: white;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.text{
+  font-size: 18px;
+}
+
+.box{
+  width: 100%;
+  background: rgba(0,0,0,0.2);
+  padding: 50px;
+  border-bottom-width: 3px;
+  border-bottom-color: rgba(0,0,0,0.5);
+
+}
+
+.box2{
+  width: 100%;
+  background: rgba(0,0,0,0.4);
+  padding: 50px;
+  border-bottom-width: 3px;
+  border-bottom-color: rgba(0,0,0,0.5);
+
+}
+
+.active{
+  border-left-width: 15px;
+  border-left-color: green;
+  border-left-style: solid;
+}
