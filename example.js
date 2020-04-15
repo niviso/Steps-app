@@ -1,8 +1,11 @@
 import SortableListView from 'react-native-sortable-listview'
-let React = require('react')
+import React,{useEffect,useState,useContext} from 'react';
 let { View, Text, TouchableHighlight } = require('react-native')
 import styles from './style.scss';
-let data = {
+import { FontAwesome } from '@expo/vector-icons';
+
+import { ListContext } from "./Contexts/ListContext";
+let exampleData = {
   hello: { text: 'world' },
   how: { text: 'are you' },
   test: { text: 123 },
@@ -22,41 +25,65 @@ let data = {
   kk: { text: 'kk' },
 }
 
-let order = Object.keys(data) //Array of keys
 
-class RowComponent extends React.Component {
-  render() {
+function RowComponent(props) {
+  const [state,setState] = useContext(ListContext);
+  FilterState = (text) => {
+    let newData = JSON.parse(JSON.stringify(state));
+    const result = newData.filter(row => row.text !== text);
+
+    setState(result);
+  }
     return (
-      <View         style={styles.box}>
-      <Text>{this.props.data.text}</Text>
+      <View style={styles.boxWrapper}>
+      <View style={styles.box}>
+      {props.data.draggable && (
+      <TouchableHighlight
+        underlayColor={'none'}
+        style={styles.dragHandler}
+        {...props.sortHandlers}
+      >
+      <Text><FontAwesome  name="bars"  size={20} />
+</Text>
+      </TouchableHighlight>
+    )}
+      <Text style={styles.text}>{props.data.text}</Text>
+      {props.data.draggable && (
 
       <TouchableHighlight
-        underlayColor={'#eee'}
+      underlayColor="inherit"
+activeOpacity={1.0}        onPress={() => FilterState(props.data.text)}
         style={styles.dragHandler}
-        {...this.props.sortHandlers}
       >
-      <Text>DRAG</Text>
+      <Text><FontAwesome  name="trash"  size={20} /></Text>
       </TouchableHighlight>
-      </View>
+    )}
+    </View>
+
+
+      <View style={styles.time}><Text style={styles.text}>{props.time && props.time.toString()}min</Text></View></View>
     )
-  }
+
 }
 
-class Example extends React.Component {
-  render() {
+function Example(props){
+  const [state,setState] = useContext(ListContext);
+  let order = Object.keys(state) //Array of keys
+
     return (
       <SortableListView
         style={styles.maxWidth}
-        data={data}
+        data={state}
         order={order}
+        limitScrolling={false}
+        disableSorting={false}
         onRowMoved={e => {
           order.splice(e.to, 0, order.splice(e.from, 1)[0])
-          this.forceUpdate()
+
         }}
         renderRow={row => <RowComponent data={row} />}
       />
     )
-  }
 }
 
 export default Example

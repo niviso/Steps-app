@@ -6,6 +6,7 @@ import { Notifications } from 'expo';
 import styles from './style.scss';
 import PushNotificationHelper from './helpers/pushNotificationHelper';
 import Example from './example';
+import { ListProvider } from "./Contexts/ListContext";
 
 export default function App() {
   const reset = () => {
@@ -46,32 +47,14 @@ export default function App() {
     console.log("push");
   },5000);
 
-  deleteStep = (id) => {
-    const newSteps = steps.filter((step) => {
-      return step.id != id
-    });
-    setSteps(newSteps);
-    console.log("delete");
-  }
-  generateBox = (step) => {
-    return (
-      <TouchableOpacity onPress={()=> deleteStep(step.id)}  onLongPress={()=> deleteStep(step.id)} style={{...styles.box,backgroundColor: step.id % 2 ? 'rgba(0,0,0,0.1)' : 'rgba(0,0,0,0.3)'}}>
 
-    <View key={step.id}>
-    <Text style={styles.text}>{step.text}</Text>
-    </View>
-</TouchableOpacity>
-  )
-  }
 
-  const listItems = steps.map((step,index) =>
-    generateBox(step)
-  );
   return (
-    <SafeAreaView style={styles.container}>
+    <ListProvider>
+    <View style={styles.container}>
     <Example/>
     <TouchableOpacity style={styles.reset} onPress={() => reset()}><Text>Reset</Text></TouchableOpacity>
-
-    </SafeAreaView>
+    </View>
+    </ListProvider>
   );
 }
