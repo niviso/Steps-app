@@ -1,11 +1,16 @@
 import React,{useEffect,useState} from 'react';
-import { StyleSheet, Text,SafeAreaView,View,TouchableOpacity  } from 'react-native';
+import { StyleSheet, Text,SafeAreaView,View,TouchableOpacity,NativeModules  } from 'react-native';
 import * as Permissions from 'expo-permissions';
 import Constants from 'expo-constants';
 import { Notifications } from 'expo';
 import styles from './style.scss';
 import PushNotificationHelper from './helpers/pushNotificationHelper';
+import Example from './example';
+
 export default function App() {
+  const reset = () => {
+      NativeModules.DevSettings.reload();
+  }
   const [steps,setSteps] = useState([
     {
       id: 1,
@@ -55,8 +60,7 @@ export default function App() {
     <View key={step.id}>
     <Text style={styles.text}>{step.text}</Text>
     </View>
-    </TouchableOpacity>
-
+</TouchableOpacity>
   )
   }
 
@@ -65,11 +69,9 @@ export default function App() {
   );
   return (
     <SafeAreaView style={styles.container}>
-    <View style={{...styles.headingbox}}>
-    <Text style={styles.heading}>Make a sourdought</Text>
-    </View>
+    <Example/>
+    <TouchableOpacity style={styles.reset} onPress={() => reset()}><Text>Reset</Text></TouchableOpacity>
 
-    {listItems}
     </SafeAreaView>
   );
 }
