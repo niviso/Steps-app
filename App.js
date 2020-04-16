@@ -1,8 +1,5 @@
 import React,{useEffect,useState} from 'react';
-import { StyleSheet, Text,SafeAreaView,View,TouchableOpacity,NativeModules  } from 'react-native';
-import * as Permissions from 'expo-permissions';
-import Constants from 'expo-constants';
-import { Notifications } from 'expo';
+import { View,TouchableOpacity,NativeModules,Text  } from 'react-native';
 import styles from './style.scss';
 import PushNotificationHelper from './helpers/pushNotificationHelper';
 import Example from './example';
@@ -12,30 +9,7 @@ export default function App() {
   const reset = () => {
       NativeModules.DevSettings.reload();
   }
-  const [steps,setSteps] = useState([
-    {
-      id: 1,
-      text:'Step 1',
-      time: 0
-    },
-    {
-      id: 2,
-      text:'Step 2',
-      time: 30
-    }
-    ,
-    {
-      id: 3,
-      text:'Step 3',
-      time: 30
-    }
-    ,
-    {
-      id: 4,
-      text:'Step 4',
-      time: 30
-    }
-  ]);
+
 
   setTimeout(x=>{
     PushNotificationHelper.registerForPushNotificationsAsync();

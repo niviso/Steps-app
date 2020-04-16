@@ -3,6 +3,8 @@ import React,{useEffect,useState,useContext} from 'react';
 let { View, Text, TouchableHighlight } = require('react-native')
 import styles from './style.scss';
 import { FontAwesome } from '@expo/vector-icons';
+import moment from 'moment';
+import Moment from 'react-moment';
 
 import { ListContext } from "./Contexts/ListContext";
 let exampleData = {
@@ -34,6 +36,8 @@ function RowComponent(props) {
 
     setState(result);
   }
+
+
     return (
       <View style={styles.boxWrapper}>
       <View style={styles.box}>
@@ -61,7 +65,10 @@ activeOpacity={1.0}        onPress={() => FilterState(props.data.text)}
     </View>
 
 
-      <View style={styles.time}><Text style={styles.text}>{props.time && props.time.toString()}min</Text></View></View>
+      <View style={styles.time}><Text><Moment element={Text} fromNow>
+          {moment().format('YYYY-MM-DD') + "T" + props.data.timestamp}
+      </Moment></Text></View></View>
+
     )
 
 }
