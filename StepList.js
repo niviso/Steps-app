@@ -1,10 +1,7 @@
+import React,{useContext} from 'react';
 import SortableListView from 'react-native-sortable-listview'
-import React,{useEffect,useState,useContext} from 'react';
-import { View,TouchableOpacity,NativeModules,Text  } from 'react-native';
+import { View,Text } from 'react-native';
 import styles from './style.scss';
-import { FontAwesome } from '@expo/vector-icons';
-import moment from 'moment';
-import Moment from 'react-moment';
 import Row from './row';
 import { ListContext } from "./Contexts/ListContext";
 

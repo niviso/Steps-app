@@ -11,13 +11,6 @@ const ListContext = React.createContext([{}, () => {}]);
 const ListProvider = (props) => {
   const [state, setState] = useState(exampleData);
 
-  remove = (item) => {
-    
-  }
-
-  add = (item) => {
-
-  }
   return (
     <ListContext.Provider value={[state, setState]}>
       {props.children}

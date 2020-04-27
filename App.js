@@ -1,9 +1,10 @@
-import React,{useEffect,useState} from 'react';
+import React from 'react';
 import { View,TouchableOpacity,NativeModules,Text  } from 'react-native';
-import styles from './style.scss';
 import PushNotificationHelper from './helpers/pushNotificationHelper';
-import StepList from './StepList';
 import { ListProvider } from "./Contexts/ListContext";
+import StepList from './StepList';
+import styles from './style.scss';
+
 const theme = {
   primary: 'red',
   contrast: 'white',

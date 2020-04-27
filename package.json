@@ -8,7 +8,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "expo": "~37.0.3",
+    "expo": "^37.0.7",
     "moment": "^2.24.0",
     "node-sass": "^4.13.1",
     "react": "~16.9.0",
@@ -25,11 +25,11 @@
   },
   "private": true,
   "babel": {
-  "presets": ["module:metro-react-native-babel-preset"],
-  "env": {
-    "production": {
+    "presets": [
+      "module:metro-react-native-babel-preset"
+    ],
+    "env": {
+      "production": {}
     }
-}
-
-}
+  }
 }
