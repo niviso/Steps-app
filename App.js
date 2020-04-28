@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { View,TouchableOpacity,NativeModules,Text  } from 'react-native';
 import PushNotificationHelper from './helpers/pushNotificationHelper';
 import { ListProvider } from "./Contexts/ListContext";
@@ -6,11 +6,13 @@ import StepList from './StepList';
 import styles from './style.scss';
 
 const theme = {
-  primary: 'red',
+  primary: 'green',
   contrast: 'white',
   secondary: 'green'
 }
 export default function App() {
+
+  const [state,setState] = useState(0);
   const reset = () => {
       NativeModules.DevSettings.reload();
   }
@@ -31,6 +33,7 @@ export default function App() {
   return (
     <ListProvider>
     <View style={styles.container}>
+
     <StepList theme={theme}/>
     <TouchableOpacity style={styles.reset} onPress={() => reset()}><Text>Reset</Text></TouchableOpacity>
     </View>

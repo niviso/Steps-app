@@ -10,18 +10,9 @@ import Moment from 'react-moment';
 export default function Row(props) {
   const [state,setState] = useContext(ListContext);
   FilterState = (data) => {
-    let newData = JSON.parse(JSON.stringify(state));
-    let result = {}
-    try{
-      for(let step in newData){
-        if(step != data){
-          result = {...result,newData[step]}
-        }
-      }
-      setState(result);
-    } catch (e) {console.log(e);}
+      const result = state.filter(obj => obj !== data );
+      setState(result); //BUG, if you delete item sorting does not work
   }
-
     return (
       <View style={styles.boxWrapper}>
       <View style={styles.box}>
