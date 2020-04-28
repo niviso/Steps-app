@@ -10,7 +10,9 @@ const theme = {
   contrast: 'white',
   secondary: 'green'
 }
+
 export default function App() {
+  const mode = 'normal';
 
   const [state,setState] = useState(0);
   const reset = () => {
@@ -33,8 +35,8 @@ export default function App() {
   return (
     <ListProvider>
     <View style={styles.container}>
-
-    <StepList theme={theme}/>
+    
+    <StepList/>
     <TouchableOpacity style={styles.reset} onPress={() => reset()}><Text>Reset</Text></TouchableOpacity>
     </View>
     </ListProvider>

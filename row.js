@@ -8,6 +8,7 @@ import Moment from 'react-moment';
 
 
 export default function Row(props) {
+  const {data,sortHandlers,edit} = props;
   const [state,setState] = useContext(ListContext);
   FilterState = (data) => {
       const result = state.filter(obj => obj !== data );
@@ -16,18 +17,18 @@ export default function Row(props) {
     return (
       <View style={styles.boxWrapper}>
       <View style={styles.box}>
-      {props.data.draggable && (
+      {data.draggable && edit && (
         <TouchableHighlight
           underlayColor={'#fff'}
           style={styles.dragHandler}
-          {...props.sortHandlers}
+          {...sortHandlers}
         >
           <Text><FontAwesome  name="bars"  size={20} /></Text>
         </TouchableHighlight>
       )}
-      <Text style={styles.text}>{props.data.text}</Text>
-      {props.data.draggable && (
-        <TouchableHighlight underlayColor={'#fff'} activeOpacity={1.0}        onPress={() => FilterState(props.data)} style={styles.dragHandler}>
+      <Text style={styles.text}>{data.text}</Text>
+      {data.draggable && edit && (
+        <TouchableHighlight underlayColor={'#fff'} activeOpacity={1.0}        onPress={() => FilterState(data)} style={styles.dragHandler}>
           <Text><FontAwesome  name="trash"  size={20} /></Text>
         </TouchableHighlight>
       )}
@@ -35,8 +36,8 @@ export default function Row(props) {
 
 
     <View  style={[{...styles.time},
-        !props.data.timestamp && {display: 'none'}]}><Text><Moment element={Text} fromNow>
-        {moment().format('YYYY-MM-DD') + "T" + props.data.timestamp}
+        !data.timestamp && {display: 'none'}]}><Text><Moment element={Text} fromNow>
+        {moment().format('YYYY-MM-DD') + "T" + data.timestamp}
     </Moment></Text></View></View>
     )
 }
