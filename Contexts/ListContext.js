@@ -15,7 +15,7 @@ const exampleDataList = [
   }
 
 let exampleData = {
-  lists: [{id: 0,name: "test",contents: exampleDataList, theme:theme,edit: true}]
+  lists: [{id: 0,name: "test",contents: exampleDataList, theme:theme,edit: true,lastAction: 'toggle'}]
 }
 const ListContext = React.createContext([{}, () => {}]);
 

@@ -11,12 +11,13 @@ function StepList(props){
   ToggleEdit = () => {
     var tmp = JSON.parse(JSON.stringify(state));
     tmp.lists[0].edit = !tmp.lists[0].edit;
+    tmp.lists[0].lastAction = 'toggle';
     setState(tmp);
   }
   UpdateState = (newData) => {
-    console.log(newData);
     var tmp = JSON.parse(JSON.stringify(state));
     tmp.lists[0].contents = newData;
+    tmp.lists[0].lastAction = 'order';
     setState(tmp);
   }
   ArrayMove = (arr, old_index, new_index) => {
@@ -42,11 +43,11 @@ function StepList(props){
           var newOrder = ArrayMove(state.lists[0].contents,e.from,e.to);
           UpdateState(newOrder);
         }}
-        renderRow={row => <Row edit={state.lists[0].edit} data={row} />}
+        renderRow={row => <Row edit={state.lists[0].edit} lastAction={state.lists[0].lastAction} data={row} />}
       />
       <TouchableHighlight onPress={() => ToggleEdit()} style={styles.controlls}>
 
-      <Text>Toggle edit</Text>
+      <Text>Toggle edit, LATEST ACTION IS: {state.lists[0].lastAction}</Text>
       </TouchableHighlight>
       </View>
     )
