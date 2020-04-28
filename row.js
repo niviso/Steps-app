@@ -27,7 +27,7 @@ export default function Row(props) {
           style={styles.dragHandler}
           {...edit ? sortHandlers : null}
         >
-        <SimpleAnimation animateOnUpdate={lastAction == 'toggle' ? true : false} duration={250} distance={20} movementType="slide" aim={edit ? "in" : "out"} direction="right">
+        <SimpleAnimation friction={4} animateOnUpdate={lastAction == 'toggle' ? true : false} duration={500} distance={40} staticType="zoom" movementType="spring" aim={edit ? "in" : "out"} direction="right">
           <Text><FontAwesome  name="bars"  size={20} /></Text>
           </SimpleAnimation>
         </TouchableHighlight>
@@ -35,7 +35,7 @@ export default function Row(props) {
       <Text style={styles.text}>{data.text}</Text>
       {data.draggable && (
         <TouchableHighlight underlayColor={'#fff'} activeOpacity={1.0} onPress={(e) => console.log("click")} style={styles.dragHandler}>
-        <SimpleAnimation animateOnUpdate={lastAction == 'toggle' ? true : false} duration={250} distance={20} movementType="slide" aim={edit ? "in" : "out"} direction="left">
+        <SimpleAnimation friction={4} animateOnUpdate={lastAction == 'toggle' ? true : false} duration={500} distance={40} staticType="zoom" movementType="spring" aim={edit ? "in" : "out"} direction="left">
           {edit &&(
           <Text><FontAwesome  name="trash"  size={20} /></Text>
           )}
