@@ -6,54 +6,54 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import RNPickerSelect from 'react-native-picker-select';
 
 export default function popup(props){
-  const pickerSelectStyles = StyleSheet.create({
-  inputIOS: {
-    fontSize: 16,
-    paddingVertical: 12,
-    paddingHorizontal: 10,
-    borderWidth: 1,
-    borderColor: 'gray',
-    borderRadius: 4,
-    color: 'black',
-    paddingRight: 30, // to ensure the text is never behind the icon
-  },
-  inputAndroid: {
-    fontSize: 16,
-    paddingHorizontal: 10,
-    paddingVertical: 8,
-    borderWidth: 0.5,
-    borderColor: 'purple',
-    borderRadius: 8,
-    color: 'black',
-    paddingRight: 30, // to ensure the text is never behind the icon
-  },
-});
-  const {onSubmit} = props;
-  const [text, setText] = React.useState('');
-  const [time,setTime] = useState(0);
+  const {onSubmit,onCancel,heading="No heading"} = props;
+  const [text, setText] = React.useState(null);
+  const [time,setTime] = useState(null);
   const [showTime,setShowTime] = useState(false);
   HandleTime = (e) =>{
     setShowTime(false);
     setTime(e.toString());
   }
+  Submit = () => {
+    if(!text){
+      alert("Set text");
+      return;
+    }
+    if(!time){
+      alert("Set time!");
+      return;
+    }
+    onSubmit(text,time);
+
+  }
   const placeholder = {
   label: 'Set time...',
   value: null,
-  color: '#000000',
+  color: '#fafafa',
 };
   return(
     <View style={styles.container}>
     <SimpleAnimation duration={500} staticType="zoom" style={styles.innerContainer}>
-    <Text style={styles.headingText}>This is the heading text</Text>
+    <Text style={styles.headingText}>{heading}</Text>
+    <Text style={styles.label}>Label</Text>
     <TextInput
+      autoFocus
       style={styles.input}
       onChangeText={text => setText(text)}
       value={text}
       onSubmitEditing={() => onSubmit(text)}
     />
+    <Text style={styles.label}>Set time</Text>
     <RNPickerSelect
     onValueChange={(value) => HandleTime(value)}
-    style={pickerSelectStyles}
+    style={{
+      inputAndroid: {
+        ...styles.picker
+      },
+      inputIOS: {
+        ...styles.picker
+      }
+    }}
     placeholder={placeholder}
     items={[
         { label: 'Now', value: 'Now' },
@@ -61,9 +61,14 @@ export default function popup(props){
         { label: 'In 1h', value: 'hockey' },
     ]}
     />
-    <TouchableOpacity onPress={() => onSubmit()}>
-    <Text>Close</Text>
+    <View style={styles.buttonWrapper}>
+    <TouchableOpacity style={styles.cancelButton} onPress={() => onCancel()}>
+    <Text style={styles.buttonText}>Cancel</Text>
     </TouchableOpacity>
+    <TouchableOpacity style={styles.submitButton} onPress={() => Submit()}>
+    <Text style={styles.buttonText}>Submit</Text>
+    </TouchableOpacity>
+    </View>
     </SimpleAnimation>
 
     </View>

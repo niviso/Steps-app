@@ -22,9 +22,9 @@ function StepList(props){
     tmp.lists[0].lastAction = action;
     setState(tmp);
   }
-  AddStep = (input) => {
+  AddStep = (input,time) => {
     var tmp = JSON.parse(JSON.stringify(state));
-    tmp.lists[0].contents.push({ id: Math.floor(Math.random() * 1000),text: input,draggable: true,time: 30,timestamp: '14:13' })
+    tmp.lists[0].contents.push({ id: Math.floor(Math.random() * 1000),text: input,draggable: true,time: time,timestamp: '14:13' })
     tmp.lists[0].lastAction = 'add';
     setState(tmp);
     setShowInput(false);
@@ -63,7 +63,7 @@ function StepList(props){
 
       <Text style={{color: 'white'}}>Add</Text>
       </TouchableOpacity>
-      {showInput && <Popup onSubmit={AddStep}/>}
+      {showInput && <Popup heading="New item" onCancel={() => setShowInput(false)} onSubmit={AddStep}/>}
       <TouchableOpacity underlayColor={'none'} style={styles.reset} onPress={() => Reset()}>
         <Text style={{color: 'white'}}>Reset</Text>
       </TouchableOpacity>
