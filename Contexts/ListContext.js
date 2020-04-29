@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
 const exampleDataList = [
-  { text: 'Mix ingridients',details:'x',draggable: true,timestamp: null },
-  { text: 'world 2',draggable: true,time: 30,timestamp: '11:13' },
-  { text: 'world 3',draggable: true,time: 30,timestamp: '13:13' },
-  { text: 'world 4',draggable: true,time: 30,timestamp: '13:50' },
-  { text: 'world 5',draggable: true,time: 30,timestamp: '14:13' },
+  { id: 0,text: 'Mix ingridients',details:'x',draggable: true,timestamp: null },
+  { id: 1,text: 'world 2',draggable: true,time: 30,timestamp: '11:13' },
+  { id: 2,text: 'world 3',draggable: true,time: 30,timestamp: '13:13' },
+  { id: 3,text: 'world 4',draggable: true,time: 30,timestamp: '13:50' },
+  { id: 4,text: 'world 5',draggable: true,time: 30,timestamp: '14:13' },
   ]
 
   const theme = {

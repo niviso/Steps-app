@@ -10,11 +10,12 @@ import { SimpleAnimation } from 'react-native-simple-animations';
 
 export default function Row(props) {
   const {data,sortHandlers,edit,lastAction} = props;
-  console.log("LATEST ACTION",data.lastAction);
 
   const [state,setState] = useContext(ListContext);
   FilterState = (data) => {
-      const result = state.lists[0].contents.filter(obj => obj !== data );
+    console.log("Filtering");
+      var result = JSON.parse(JSON.stringify(state));
+      result.lists[0].contents = result.lists[0].contents.filter(obj => obj.id !== data.id );
       result.lists[0].lastAction = 'delete';
       setState(result);
   }
@@ -34,7 +35,7 @@ export default function Row(props) {
       )}
       <Text style={styles.text}>{data.text}</Text>
       {data.draggable && (
-        <TouchableHighlight underlayColor={'#fff'} activeOpacity={1.0} onPress={(e) => console.log("click")} style={styles.dragHandler}>
+        <TouchableHighlight underlayColor={'#fff'} activeOpacity={1.0} onPress={(e) => FilterState(data)} style={styles.dragHandler}>
         <SimpleAnimation friction={4} animateOnUpdate={lastAction == 'toggle' ? true : false} duration={500} distance={40} staticType="zoom" movementType="spring" aim={edit ? "in" : "out"} direction="left">
           {edit &&(
           <Text><FontAwesome  name="trash"  size={20} /></Text>

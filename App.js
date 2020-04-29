@@ -4,7 +4,7 @@ import PushNotificationHelper from './helpers/pushNotificationHelper';
 import { ListProvider } from "./Contexts/ListContext";
 import StepList from './StepList';
 import styles from './style.scss';
-
+console.log("Render");
 const theme = {
   primary: 'green',
   contrast: 'white',
@@ -35,9 +35,11 @@ export default function App() {
   return (
     <ListProvider>
     <View style={styles.container}>
-    
+
     <StepList/>
-    <TouchableOpacity style={styles.reset} onPress={() => reset()}><Text>Reset</Text></TouchableOpacity>
+    <TouchableOpacity underlayColor={'none'} style={styles.reset} onPress={() => reset()}>
+      <Text style={{color: 'white'}}>Reset</Text>
+    </TouchableOpacity>
     </View>
     </ListProvider>
   );
