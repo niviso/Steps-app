@@ -6,7 +6,7 @@ import StepList from './StepList';
 import styles from './style.scss';
 console.log("Render");
 const theme = {
-  primary: 'green',
+  primary: 'red',
   contrast: 'white',
   secondary: 'green'
 }
@@ -15,9 +15,7 @@ export default function App() {
   const mode = 'normal';
 
   const [state,setState] = useState(0);
-  const reset = () => {
-      NativeModules.DevSettings.reload();
-  }
+
 
 
   setTimeout(x=>{
@@ -37,9 +35,6 @@ export default function App() {
     <View style={styles.container}>
 
     <StepList/>
-    <TouchableOpacity underlayColor={'none'} style={styles.reset} onPress={() => reset()}>
-      <Text style={{color: 'white'}}>Reset</Text>
-    </TouchableOpacity>
     </View>
     </ListProvider>
   );
