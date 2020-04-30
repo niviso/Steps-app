@@ -8,7 +8,7 @@ import ArrayHelper from './helpers/arrayHelper';
 import Popup from './components/popup/popup';
 function StepList(props){
   const [state,setState] = useContext(ListContext);
-  const [showInput,setShowInput] = useState(true);
+  const [showInput,setShowInput] = useState(false);
   var order = Object.keys(state.lists[0].contents); //Array of keys
   ToggleEdit = () => {
     var tmp = JSON.parse(JSON.stringify(state));
