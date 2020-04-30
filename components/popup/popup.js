@@ -6,9 +6,9 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import RNPickerSelect from 'react-native-picker-select';
 
 export default function popup(props){
-  const {onSubmit,onCancel,heading="No heading"} = props;
-  const [text, setText] = React.useState(null);
-  const [time,setTime] = useState(null);
+  const {onSubmit,onCancel,heading="No heading",data={text: null,time: null}} = props;
+  const [text, setText] = React.useState(data.text);
+  const [time,setTime] = useState(data.time);
   const [showTime,setShowTime] = useState(false);
   HandleTime = (e) =>{
     setShowTime(false);

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const exampleDataList = [
-  { id: 0,text: 'Mix ingridients',details:'x',complete: false,draggable: true,timestamp: null },
+  { id: 0,text: 'Mix 200g flour with 100g water',details:'x',complete: false,draggable: true,timestamp: null },
   { id: 1,text: 'world 2',complete: false,draggable: true,time: 30,timestamp: '11:13' },
   { id: 2,text: 'world 3',complete: false,draggable: true,time: 30,timestamp: '13:13' },
   { id: 3,text: 'world 4',complete: false,draggable: true,time: 30,timestamp: '13:50' },
@@ -15,7 +15,7 @@ const exampleDataList = [
   }
 
 let exampleData = {
-  lists: [{id: 0,name: "test",contents: exampleDataList, theme:theme,edit: false,lastAction: 'toggle'}]
+  lists: [{id: 0,name: "test",contents: exampleDataList, theme:theme,edit: false,lastAction: 'toggle',activeItemId: 1 }]
 }
 const ListContext = React.createContext([{}, () => {}]);
 

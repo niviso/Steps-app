@@ -4,12 +4,6 @@ import PushNotificationHelper from './helpers/pushNotificationHelper';
 import { ListProvider } from "./Contexts/ListContext";
 import StepList from './StepList';
 import styles from './style.scss';
-console.log("Render");
-const theme = {
-  primary: 'red',
-  contrast: 'white',
-  secondary: 'green'
-}
 
 export default function App() {
   const mode = 'normal';
