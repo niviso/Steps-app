@@ -10,10 +10,9 @@ import Popup from './components/popup/popup';
 
 
 export default function Row(props) {
-  const {data,sortHandlers,edit,lastAction} = props;
+  const {data,sortHandlers,edit,lastAction,editFunc} = props;
   const [state,setState] = useContext(ListContext);
   const active = state.lists[0].activeItemId === data.id;
-  const [editItem,setEditItem] = useState(false);
   FilterState = (data) => {
       if(!edit){
         return;
@@ -42,10 +41,6 @@ export default function Row(props) {
       setState(result);
   }
 
-  EditItem = () => {
-    setEditItem(true);
-  }
-
     return (
       <View style={styles.boxWrapper}>
       <View style={{opacity: data.complete ? 0.3 : 1,...styles.box}}>
@@ -61,7 +56,8 @@ export default function Row(props) {
         </TouchableHighlight>
       )}
 
-      <TouchableOpacity style={styles.TextBox} onPress={() => edit ? EditItem() : CompleteItem(data.id)}>
+      <TouchableOpacity style={styles.TextBox} onPress={() => edit ? editFunc(data.id) : CompleteItem(data.id)}>
+      {edit && <Text style={{fontSize: 8, textDecorationLine: 'underline',marginBottom: 2}}>Click to edit text</Text> }
       <Text style={{...styles.text,textDecorationLine:  data.complete ? 'line-through' : 'none'}}>{data.id + ": " + data.text}</Text>
       </TouchableOpacity>
       {data.draggable && (
@@ -83,9 +79,6 @@ export default function Row(props) {
         {moment().format('YYYY-MM-DD') + "T" + data.timestamp}
     </Moment></Text></View>
   )}
-    {editItem &&(
-    <Popup data={data} onCancel={() => setEditItem(false)}/>
-    )}
     </View>
     )
 }

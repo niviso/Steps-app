@@ -9,6 +9,7 @@ import Popup from './components/popup/popup';
 function StepList(props){
   const [state,setState] = useContext(ListContext);
   const [showInput,setShowInput] = useState(false);
+  const [editItem,setEditItem] = useState(null);
   var order = Object.keys(state.lists[0].contents); //Array of keys
   ToggleEdit = () => {
     var tmp = JSON.parse(JSON.stringify(state));
@@ -28,15 +29,31 @@ function StepList(props){
     tmp.lists[0].lastAction = 'add';
     setState(tmp);
     setShowInput(false);
+  }
 
+  UpdateStep = (input,time) => {
+    var tmp = JSON.parse(JSON.stringify(state));
+    const newItem = { id: editItem,text: input,draggable: true,time: time,timestamp: '14:13' }
+    tmp.lists[0].contents[editItem] = newItem;
+    setState(tmp);
+    setEditItem(null);
   }
   Reset = () => {
       NativeModules.DevSettings.reload();
   }
+  ResetList = () => {
+      var result = JSON.parse(JSON.stringify(state));
+      for(let i=0;i!=result.lists[0].contents.length;i++){
+        result.lists[0].contents[i].complete = false;
+      }
 
+      result.lists[0].activeItemId = result.lists[0].contents[0];
+      setState(result);
+  }
   UpdateContents = (from,to) => {
     var newOrder = ArrayHelper.MoveIndex(state.lists[0].contents,from,to);
     UpdateState(newOrder,'order');
+    ResetList();
   }
 
 
@@ -53,7 +70,7 @@ function StepList(props){
         onRowMoved={e => {
           UpdateContents(e.from,e.to);
         }}
-        renderRow={row => <Row edit={state.lists[0].edit} lastAction={state.lists[0].lastAction} data={row} />}
+        renderRow={row => <Row editFunc={setEditItem} edit={state.lists[0].edit} lastAction={state.lists[0].lastAction} data={row} />}
       />
       <TouchableOpacity underlayColor={'none'} onPress={() => ToggleEdit()} style={{...styles.controlls,backgroundColor: state.lists[0].edit ? 'green' : 'orange'}}>
 
@@ -64,6 +81,9 @@ function StepList(props){
       <Text style={{color: 'white'}}>Add</Text>
       </TouchableOpacity>
       {showInput && <Popup heading="New item" onCancel={() => setShowInput(false)} onSubmit={AddStep}/>}
+      {editItem &&(
+      <Popup data={state.lists[0].contents[editItem]} onSubmit={UpdateStep} onCancel={() => setEditItem(null)}/>
+      )}
       <TouchableOpacity underlayColor={'none'} style={styles.reset} onPress={() => Reset()}>
         <Text style={{color: 'white'}}>Reset</Text>
       </TouchableOpacity>
