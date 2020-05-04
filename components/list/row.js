@@ -41,7 +41,7 @@ export default function Row(props) {
 
     return (
       <View style={styles.boxWrapper}>
-      <View style={{opacity: data.complete ? 0.3 : 1,...styles.box}}>
+      <View style={{opacity: data.complete && !edit ? 0.3 : 1,...styles.box}}>
       {data.draggable && (
         <TouchableHighlight
           underlayColor={'#fff'}
@@ -56,7 +56,7 @@ export default function Row(props) {
 
       <TouchableOpacity style={styles.TextBox} onPress={() => edit ? editFunc(data.id) : CompleteItem(data.id)}>
       {edit && <Text style={{fontSize: 8, textDecorationLine: 'underline',marginBottom: 2}}>Click to edit text</Text> }
-      <Text style={{...styles.text,textDecorationLine:  data.complete ? 'line-through' : 'none'}}>{data.id + ": " + data.text}</Text>
+      <Text style={{...styles.text,textDecorationLine:  data.complete && !edit ? 'line-through' : 'none'}}>{data.id + ": " + data.text}</Text>
       </TouchableOpacity>
       {data.draggable && (
         <TouchableHighlight underlayColor={'#fff'} activeOpacity={1.0} onPress={(e) => FilterState(data)} style={styles.dragHandler}>
@@ -71,7 +71,7 @@ export default function Row(props) {
       )}
     </View>
 
-    {active && !data.complete && (
+    {active && !edit && !data.complete && (
     <View  style={[{...styles.time},
         !data.timestamp && {display: 'none'}]}><Text><Moment element={Text} fromNow>
         {moment().format('YYYY-MM-DD') + "T" + data.timestamp}
