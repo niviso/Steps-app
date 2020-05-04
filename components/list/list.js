@@ -1,12 +1,12 @@
 import React,{useContext,useEffect,useState} from 'react';
 import SortableListView from 'react-native-sortable-listview'
 import { View,Text,TouchableOpacity,NativeModules } from 'react-native';
-import styles from './style.scss';
+import styles from '../../style.scss';
 import Row from './row';
-import { ListContext } from "./Contexts/ListContext";
-import ArrayHelper from './helpers/arrayHelper';
-import Popup from './components/popup/popup';
-function StepList(props){
+import { ListContext } from "../../contexts/ListContext";
+import ArrayHelper from '../../helpers/arrayHelper';
+import Popup from '../popup/popup';
+function List(props){
   const [state,setState] = useContext(ListContext);
   const [showInput,setShowInput] = useState(false);
   const [editItem,setEditItem] = useState(null);
@@ -91,4 +91,4 @@ function StepList(props){
     )
 }
 
-export default StepList
+export default List

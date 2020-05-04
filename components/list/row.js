@@ -1,13 +1,11 @@
 import React,{useContext,useState} from 'react';
 import { View,TouchableHighlight,TouchableOpacity,Text  } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
-import { ListContext } from "./Contexts/ListContext";
-import styles from './style.scss';
+import { ListContext } from "../../contexts/ListContext";
+import styles from '../../style.scss';
 import moment from 'moment';
 import Moment from 'react-moment';
 import { SimpleAnimation } from 'react-native-simple-animations';
-import Popup from './components/popup/popup';
-
 
 export default function Row(props) {
   const {data,sortHandlers,edit,lastAction,editFunc} = props;
