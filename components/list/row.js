@@ -1,12 +1,12 @@
 import React,{useContext,useState} from 'react';
-import { View,TouchableHighlight,TouchableOpacity,Text  } from 'react-native';
+import { View,TouchableHighlight,TouchableOpacity,Text,Image  } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { ListContext } from "../../contexts/ListContext";
 import styles from './style.scss';
 import moment from 'moment';
 import Moment from 'react-moment';
 import { SimpleAnimation } from 'react-native-simple-animations';
-
+import Timer from '../timer/timer';
 export default function Row(props) {
   const {data,sortHandlers,edit,lastAction,editFunc} = props;
   const [state,setState] = useContext(ListContext);
@@ -41,7 +41,16 @@ export default function Row(props) {
 
     return (
       <View style={styles.boxWrapper}>
+
       <View style={{opacity: data.complete && !edit ? 0.3 : 1,backgroundColor: active && !edit ? state.lists[0].theme.primary : 'white',...styles.box}}>
+      {data.type == 'timer' && (
+      <Image
+        style={styles.timerBackground}
+        source={{
+          uri: 'https://i.pinimg.com/originals/f4/52/a2/f452a2f4b634b3011e065da8eaf0a5c3.gif',
+        }}
+      />
+      )}
       {data.draggable && (
         <TouchableHighlight
           underlayColor={'#fff'}
@@ -55,10 +64,14 @@ export default function Row(props) {
       )}
 
       <TouchableOpacity style={{...styles.TextBox, display: 'flex',flexDirection: 'row'}} onPress={() => edit ? editFunc(data.id) : CompleteItem(data.id)}>
+      {data.type == 'text' && (
       <Text style={{...styles.text,textDecorationLine:  data.complete && !edit ? 'line-through' : 'none',fontWeight: active ? 'bold' : 'normal',color: active && !edit ? state.lists[0].theme.contrast : 'black'}}>
-      {data.time == 0 && data.text}
-      {data.time > 0 && "✋" + data.time + "min ✋"}
+      {data.text}
       </Text>
+      )}
+      {data.type == 'timer' && (
+      <Timer active={active}/>
+      )}
       </TouchableOpacity>
       {data.draggable && (
         <TouchableHighlight underlayColor={'#fff'} activeOpacity={1.0} onPress={(e) => FilterState(data)} style={styles.dragHandler}>
