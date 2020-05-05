@@ -39,8 +39,18 @@ function List(props){
     setState(tmp);
     setEditItem(null);
   }
-  Reset = () => {
-      NativeModules.DevSettings.reload();
+  Undo = () => {
+    var tmp = JSON.parse(JSON.stringify(state));
+      //NativeModules.DevSettings.reload();
+      for(let i=0;i!=tmp.lists[0].contents.length;i++){
+        if(tmp.lists[0].contents[i].id == tmp.lists[0].activeItemId && tmp.lists[0].contents[i - 1]){
+          tmp.lists[0].activeItemId = tmp.lists[0].contents[i - 1].id;
+          tmp.lists[0].contents[i - 1].complete = false;
+          break;
+        }
+      }
+      setState(tmp);
+
   }
   ResetList = () => {
       var result = JSON.parse(JSON.stringify(state));
@@ -48,7 +58,7 @@ function List(props){
         result.lists[0].contents[i].complete = false;
       }
 
-      result.lists[0].activeItemId = result.lists[0].contents[0];
+      result.lists[0].activeItemId = result.lists[0].contents[0].id;
       setState(result);
   }
   UpdateContents = (from,to) => {
@@ -81,8 +91,8 @@ function List(props){
         <Text style={{color: 'white'}}><FontAwesome  name="plus"  size={20} /></Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.resetBtn} onPress={() => Reset()}>
-        <Text style={{color: 'white'}}><FontAwesome  name="retweet"  size={20} /></Text>
+      <TouchableOpacity style={{...styles.undoBtn,backgroundColor: state.lists[0].theme.primary}} onPress={() => Undo()}>
+        <Text style={{color: 'white'}}><FontAwesome  name="undo"  size={20} /></Text>
       </TouchableOpacity>
 
       {showInput && <Popup heading="New item" onCancel={() => setShowInput(false)} onSubmit={AddStep}/>}

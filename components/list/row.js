@@ -41,7 +41,7 @@ export default function Row(props) {
 
     return (
       <View style={styles.boxWrapper}>
-      <View style={{opacity: data.complete && !edit ? 0.3 : 1,...styles.box}}>
+      <View style={{opacity: data.complete && !edit ? 0.3 : 1,backgroundColor: active && !edit ? state.lists[0].theme.primary : 'white',...styles.box}}>
       {data.draggable && (
         <TouchableHighlight
           underlayColor={'#fff'}
@@ -55,8 +55,10 @@ export default function Row(props) {
       )}
 
       <TouchableOpacity style={{...styles.TextBox, display: 'flex',flexDirection: 'row'}} onPress={() => edit ? editFunc(data.id) : CompleteItem(data.id)}>
-      <Text>{edit && <FontAwesome  name="pencil"  size={20} />}</Text>
-      <Text style={{...styles.text,textDecorationLine:  data.complete && !edit ? 'line-through' : 'none'}}>{data.text}</Text>
+      <Text style={{...styles.text,textDecorationLine:  data.complete && !edit ? 'line-through' : 'none',fontWeight: active ? 'bold' : 'normal',color: active && !edit ? state.lists[0].theme.contrast : 'black'}}>
+      {data.time == 0 && data.text}
+      {data.time > 0 && "✋" + data.time + "min ✋"}
+      </Text>
       </TouchableOpacity>
       {data.draggable && (
         <TouchableHighlight underlayColor={'#fff'} activeOpacity={1.0} onPress={(e) => FilterState(data)} style={styles.dragHandler}>
@@ -70,17 +72,6 @@ export default function Row(props) {
 
       )}
     </View>
-
-    {active && !edit && !data.complete && (
-    <View  style={[{...styles.time,backgroundColor: state.lists[0].theme.secondary},!data.timestamp && {display: 'none'}]}>
-        <SimpleAnimation duration={1000} distance={50} movementType="slide" direction="up">
-        <Text style={{color: 'white'}}>
-    <Moment element={Text} fromNow>
-        {moment().format('YYYY-MM-DD') + "T" + data.timestamp}
-    </Moment></Text>
-    </SimpleAnimation>
-      </View>
-  )}
   </View>
 
   )

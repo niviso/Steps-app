@@ -15,7 +15,7 @@
   height: 60px;
   border-bottom-color: gray;
   border-bottom-style: solid;
-  border-bottom-width: 2px;
+  border-bottom-width: 1px;
 
 }
 
@@ -103,7 +103,7 @@
   height: 50px;
 }
 
-.resetBtn{
+.undoBtn{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -111,7 +111,7 @@
   width: 75px;
   height: 75px;
   border-radius: 100%;
-  right:40%;
   position: absolute;
-  bottom: 20px;
+  right: 10px;
+  bottom: 10px;
 }

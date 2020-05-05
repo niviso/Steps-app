@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 
 const exampleDataList = [
-  { id: 0,text: 'Mix 200g flour with 100g water',complete: false,draggable: true,time: 30,timestamp: '11:13' },
-  { id: 1,text: 'world 2',complete: false,draggable: true,time: 30,timestamp: '11:13' },
-  { id: 2,text: 'world 3',complete: false,draggable: true,time: 30,timestamp: '13:13' },
-  { id: 3,text: 'world 4',complete: false,draggable: true,time: 30,timestamp: '13:50' },
-  { id: 4,text: 'world 5',complete: false,draggable: true,time: 30,timestamp: '14:13' },
-  { id: 5,text: 'world 5',complete: false,draggable: true,time: 30,timestamp: '14:13' },
-  { id: 6,text: 'world 5',complete: false,draggable: true,time: 30,timestamp: '14:13' },
-  { id: 7,text: 'world 5',complete: false,draggable: true,time: 30,timestamp: '14:13' },
+  { id: 0,text: 'Mix Starter with Water',complete: false,draggable: true,time: 0},
+  { id: 1,text: 'Fold dought',complete: false,draggable: true,time: 0},
+  { id: 2,text: '',complete: false,draggable: true,time: 30},
+  { id: 3,text: 'Fold dought',complete: false,draggable: true,time: 0},
+  { id: 4,text: '',complete: false,draggable: true,time: 30},
+  { id: 5,text: 'Fold dought',complete: false,draggable: true,time: 0},
+  { id: 6,text: 'Heat oven to 250c',complete: false,draggable: true,time: 0},
+  { id: 7,text: 'Bake the bread for 45min',complete: false,draggable: true,time: 0},
+  { id: 8,text: 'Let bread cool',complete: false,draggable: true,time: 0},
+  { id: 9,text: 'Yay bread!',complete: false,draggable: true,time: 0},
 
   ]
 
