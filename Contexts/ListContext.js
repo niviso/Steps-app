@@ -13,9 +13,9 @@ const exampleDataList = [
   ]
 
   const theme = {
-    primary: 'green',
+    primary: '#533A7B',
     contrast: 'white',
-    secondary: 'green'
+    secondary: '#4059AD'
   }
 
 let exampleData = {

@@ -2,7 +2,7 @@ import React,{useContext,useState} from 'react';
 import { View,TouchableHighlight,TouchableOpacity,Text  } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { ListContext } from "../../contexts/ListContext";
-import styles from '../../style.scss';
+import styles from './style.scss';
 import moment from 'moment';
 import Moment from 'react-moment';
 import { SimpleAnimation } from 'react-native-simple-animations';
@@ -54,9 +54,9 @@ export default function Row(props) {
         </TouchableHighlight>
       )}
 
-      <TouchableOpacity style={styles.TextBox} onPress={() => edit ? editFunc(data.id) : CompleteItem(data.id)}>
-      {edit && <Text style={{fontSize: 8, textDecorationLine: 'underline',marginBottom: 2}}>Click to edit text</Text> }
-      <Text style={{...styles.text,textDecorationLine:  data.complete && !edit ? 'line-through' : 'none'}}>{data.id + ": " + data.text}</Text>
+      <TouchableOpacity style={{...styles.TextBox, display: 'flex',flexDirection: 'row'}} onPress={() => edit ? editFunc(data.id) : CompleteItem(data.id)}>
+      <Text>{edit && <FontAwesome  name="pencil"  size={20} />}</Text>
+      <Text style={{...styles.text,textDecorationLine:  data.complete && !edit ? 'line-through' : 'none'}}>{data.text}</Text>
       </TouchableOpacity>
       {data.draggable && (
         <TouchableHighlight underlayColor={'#fff'} activeOpacity={1.0} onPress={(e) => FilterState(data)} style={styles.dragHandler}>
@@ -72,11 +72,16 @@ export default function Row(props) {
     </View>
 
     {active && !edit && !data.complete && (
-    <View  style={[{...styles.time},
-        !data.timestamp && {display: 'none'}]}><Text><Moment element={Text} fromNow>
+    <View  style={[{...styles.time,backgroundColor: state.lists[0].theme.secondary},!data.timestamp && {display: 'none'}]}>
+        <SimpleAnimation duration={1000} distance={50} movementType="slide" direction="up">
+        <Text style={{color: 'white'}}>
+    <Moment element={Text} fromNow>
         {moment().format('YYYY-MM-DD') + "T" + data.timestamp}
-    </Moment></Text></View>
+    </Moment></Text>
+    </SimpleAnimation>
+      </View>
   )}
-    </View>
-    )
-}
+  </View>
+
+  )
+  }

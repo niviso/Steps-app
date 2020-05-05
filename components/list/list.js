@@ -1,10 +1,11 @@
 import React,{useContext,useEffect,useState} from 'react';
 import SortableListView from 'react-native-sortable-listview'
 import { View,Text,TouchableOpacity,NativeModules } from 'react-native';
-import styles from '../../style.scss';
+import styles from './style.scss';
 import Row from './row';
 import { ListContext } from "../../contexts/ListContext";
 import ArrayHelper from '../../helpers/arrayHelper';
+import { FontAwesome } from '@expo/vector-icons';
 import Popup from '../popup/popup';
 function List(props){
   const [state,setState] = useContext(ListContext);
@@ -72,21 +73,22 @@ function List(props){
         }}
         renderRow={row => <Row editFunc={setEditItem} edit={state.lists[0].edit} lastAction={state.lists[0].lastAction} data={row} />}
       />
-      <TouchableOpacity underlayColor={'none'} onPress={() => ToggleEdit()} style={{...styles.controlls,backgroundColor: state.lists[0].edit ? 'green' : 'orange'}}>
-
-      <Text style={{color: 'white'}}>Edit</Text>
+      <TouchableOpacity onPress={() => ToggleEdit()} style={styles.editBtn}>
+        <Text style={{color: 'white'}}>{state.lists[0].edit ? <FontAwesome  name="times"  size={20} /> : <FontAwesome  name="edit"  size={20} />}</Text>
       </TouchableOpacity>
-      <TouchableOpacity underlayColor={'none'} onPress={() => setShowInput(true)} style={{...styles.add}}>
 
-      <Text style={{color: 'white'}}>Add</Text>
+      <TouchableOpacity onPress={() => setShowInput(true)} style={styles.addBtn}>
+        <Text style={{color: 'white'}}><FontAwesome  name="plus"  size={20} /></Text>
       </TouchableOpacity>
+
+      <TouchableOpacity style={styles.resetBtn} onPress={() => Reset()}>
+        <Text style={{color: 'white'}}><FontAwesome  name="retweet"  size={20} /></Text>
+      </TouchableOpacity>
+
       {showInput && <Popup heading="New item" onCancel={() => setShowInput(false)} onSubmit={AddStep}/>}
       {editItem &&(
-      <Popup data={state.lists[0].contents[editItem]} onSubmit={UpdateStep} onCancel={() => setEditItem(null)}/>
+      <Popup heading={"Edit list item"} data={state.lists[0].contents[editItem]} onSubmit={UpdateStep} onCancel={() => setEditItem(null)}/>
       )}
-      <TouchableOpacity underlayColor={'none'} style={styles.reset} onPress={() => Reset()}>
-        <Text style={{color: 'white'}}>Reset</Text>
-      </TouchableOpacity>
       </View>
     )
 }

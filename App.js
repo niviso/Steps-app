@@ -27,7 +27,6 @@ export default function App() {
   return (
     <ListProvider>
     <View style={styles.container}>
-
     <List/>
     </View>
     </ListProvider>
