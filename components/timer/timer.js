@@ -2,52 +2,62 @@ import React,{useState,useEffect} from 'react';
 import { View,TouchableHighlight,TouchableOpacity,Text,Image  } from 'react-native';
 import PushNotificationHelper from '../../helpers/pushNotificationHelper';
 
-Number.prototype.zeroPad = function() {
-   return ('0'+this).slice(-2);
-};
 
 export default  function Timer(props){
-  const calculateTimeLeft = () => {
-  const difference = +new Date("2020-05-05T15:06") - +new Date();
+  const [timeLeft, setTimeLeft] = useState({hours:0,minutes:0,seconds:11});
   const [done,setDone] = useState(false);
-  let timeLeft = {};
 
-    if (difference > 0) {
-      timeLeft = {
-        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-        minutes: Math.floor((difference / 1000 / 60) % 60),
-        seconds: Math.floor((difference / 1000) % 60),
-        milleseconds: Math.floor(difference)
-      };
-    } else {
-      setDone(true);
-      PushNotificationHelper.sendPushNotification("Wow","amazing");
-    }
-
-    return timeLeft;
+  ZeroPad = (num) => {
+     return ('0'+num).slice(-2);
   };
 
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+
+  CalculateNewTime = () =>{
+    var tmp = JSON.parse(JSON.stringify(timeLeft));
+
+
+    if(tmp.seconds > 0){
+      tmp.seconds--;
+    }
+
+    if(tmp.seconds <= 0 && tmp.minutes <= 0 && tmp.hours <= 0){
+      setDone(true);
+      return tmp;
+    }
+
+    if(tmp.seconds <= 0 && tmp.minutes > 0){
+      tmp.minutes = tmp.minutes - 1;
+    }
+    if(tmp.minutes <=0 && tmp.hours > 0){
+      tmp.hours = tmp.hours - 1;
+    }
+
+    if(tmp.minutes == 0 && tmp.seconds == 0){
+      tmp.seconds = 60;
+    }
+
+    if(tmp.hours > 0 && tmp.minutes == 0){
+      tmp.minutes = 60;
+    }
+
+
+    return tmp;
+
+  }
 
   useEffect(() => {
-    if(props.active && !done){
+      if(!done && props.active){
       setTimeout(() => {
-        setTimeLeft(calculateTimeLeft());
+        setTimeLeft(CalculateNewTime());
       }, 1000);
       }
   });
 
-  const timerComponents =
-  <Text style={{fontWeight: 'bold',color: 'white'}}>
-{timeLeft.hours.zeroPad()}:
-  {timeLeft.minutes.zeroPad()}:
-  {timeLeft.seconds.zeroPad()}
-  </Text>
-
   return (
     <View>
-      {timeLeft.length ? timerComponents : <Text>⏰</Text>}
+      <Text style={{fontWeight: 'bold',color: 'white'}}>
+      {done ? 'done' : ZeroPad(timeLeft.hours) + ":" + ZeroPad(timeLeft.minutes) + ":" + ZeroPad(timeLeft.seconds)}
+      </Text>
     </View>
   );
 }

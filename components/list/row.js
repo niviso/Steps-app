@@ -47,7 +47,7 @@ export default function Row(props) {
       <Image
         style={styles.timerBackground}
         source={{
-          uri: 'https://i.pinimg.com/originals/f4/52/a2/f452a2f4b634b3011e065da8eaf0a5c3.gif',
+          uri: 'https://media2.giphy.com/media/xUOxeZR9gmFzbH8FRS/giphy.gif',
         }}
       />
       )}
