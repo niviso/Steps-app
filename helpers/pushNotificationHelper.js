@@ -24,7 +24,6 @@ import Constants from 'expo-constants';
         return;
       }
       token = await Notifications.getExpoPushTokenAsync();
-      console.log("token",token);
       this.expoPushToken = token;
     } else {
       alert('Must use physical device for Push Notifications');
@@ -48,7 +47,6 @@ import Constants from 'expo-constants';
 
   // Can use this function below, OR use Expo's Push Notification Tool-> https://expo.io/dashboard/notifications
   sendPushNotification = async (title,body) => {
-    console.log("Is this happening?");
     const message = {
       to: this.expoPushToken,
       sound: 'default',

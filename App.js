@@ -14,13 +14,7 @@ export default function App() {
 
   setTimeout(x=>{
     PushNotificationHelper.registerForPushNotificationsAsync();
-
   },2000);
-  setTimeout(x=>{
-
-    //PushNotificationHelper.sendPushNotification("Wow","amazing");
-    console.log("push");
-  },5000);
 
 
 
