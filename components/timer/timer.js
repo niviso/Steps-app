@@ -22,6 +22,7 @@ export default  function Timer(props){
 
     if(tmp.seconds <= 0 && tmp.minutes <= 0 && tmp.hours <= 0){
       setDone(true);
+      PushNotificationHelper.sendPushNotification("Wow","amazing");
       return tmp;
     }
 
