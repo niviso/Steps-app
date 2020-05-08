@@ -21,8 +21,8 @@ export default function Row(props) {
       setState(result);
   }
 
-  CompleteItem = (id) => {
-    if(edit){
+  CompleteItem = (id,type) => {
+    if(edit || type == 'timer'){
       return;
     }
       var result = JSON.parse(JSON.stringify(state));
@@ -63,14 +63,19 @@ export default function Row(props) {
         </TouchableHighlight>
       )}
 
-      <TouchableOpacity style={{...styles.TextBox, display: 'flex',flexDirection: 'row'}} onPress={() => edit ? editFunc(data.id) : CompleteItem(data.id)}>
-      {data.type == 'text' && (
+      <TouchableOpacity style={{...styles.TextBox, display: 'flex',flexDirection: 'row'}} onPress={() => edit ? editFunc(data.id) : CompleteItem(data.id,data.type)}>
+      {data.type == 'text' &&  (
       <Text style={{...styles.text,textDecorationLine:  data.complete && !edit ? 'line-through' : 'none',fontWeight: active ? 'bold' : 'normal',color: active && !edit ? state.lists[0].theme.contrast : 'black'}}>
       {data.text}
       </Text>
       )}
-      {data.type == 'timer' && (
-      <Timer active={active}/>
+      {data.type == 'timer' && active && (
+      <Timer active={active} data={data} CompleteItem={CompleteItem}/>
+      )}
+      {data.type == 'timer' && !active && (
+        <Text style={{color:'white',...styles.text,textDecorationLine:  data.complete && !edit ? 'line-through' : 'none',fontWeight: active ? 'bold' : 'normal'}}>
+        {data.time}min
+        </Text>
       )}
       </TouchableOpacity>
       {data.draggable && (

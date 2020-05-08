@@ -3,9 +3,12 @@ import { View,TouchableHighlight,TouchableOpacity,Text,Image  } from 'react-nati
 import PushNotificationHelper from '../../helpers/pushNotificationHelper';
 
 
-export default  function Timer(props){
-  const [timeLeft, setTimeLeft] = useState({hours:0,minutes:0,seconds:11});
-  const [done,setDone] = useState(false);
+function Timer(props){
+  const {data,active,CompleteItem} = props;
+  const {time,id,complete} = props.data;
+
+  console.log(time);
+  const [timeLeft, setTimeLeft] = useState({hours:0,minutes:0,seconds:time});
 
   ZeroPad = (num) => {
      return ('0'+num).slice(-2);
@@ -21,7 +24,7 @@ export default  function Timer(props){
     }
 
     if(tmp.seconds <= 0 && tmp.minutes <= 0 && tmp.hours <= 0){
-      setDone(true);
+      CompleteItem(id);
       PushNotificationHelper.sendPushNotification("Wow","amazing");
       return tmp;
     }
@@ -47,7 +50,7 @@ export default  function Timer(props){
   }
 
   useEffect(() => {
-      if(!done && props.active){
+      if(!complete && active){
       setTimeout(() => {
         setTimeLeft(CalculateNewTime());
       }, 1000);
@@ -56,9 +59,11 @@ export default  function Timer(props){
 
   return (
     <View>
-      <Text style={{fontWeight: 'bold',color: 'white'}}>
-      {done ? 'done' : ZeroPad(timeLeft.hours) + ":" + ZeroPad(timeLeft.minutes) + ":" + ZeroPad(timeLeft.seconds)}
+      <Text style={{fontWeight: 'bold',color: 'white',textDecorationLine: complete && 'line-through'}}>
+      {ZeroPad(timeLeft.hours) + ":" + ZeroPad(timeLeft.minutes) + ":" + ZeroPad(timeLeft.seconds)}
       </Text>
     </View>
   );
 }
+
+export default Timer;
