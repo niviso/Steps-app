@@ -1,12 +1,13 @@
 import React,{useContext,useEffect,useState} from 'react';
 import SortableListView from 'react-native-sortable-listview'
-import { View,Text,TouchableOpacity,NativeModules } from 'react-native';
+import { View,Text,TouchableOpacity,NativeModules,SafeAreaView } from 'react-native';
 import styles from './style.scss';
 import Row from './row';
 import { ListContext } from "../../contexts/ListContext";
 import ArrayHelper from '../../helpers/arrayHelper';
 import { FontAwesome } from '@expo/vector-icons';
 import Popup from '../popup/popup';
+import Header from '../header/header';
 function List(props){
   const [state,setState] = useContext(ListContext);
   const [showInput,setShowInput] = useState(false);
@@ -71,7 +72,7 @@ function List(props){
 
     return (
       <View style={styles.container}>
-        <View style={{backgroundColor: state.lists[0].theme.primary,...styles.heading}} ><Text style={{color: state.lists[0].theme.contrast,...styles.headingText}}>Surdegsbröd</Text></View>
+      <Header theme={state.lists[0].theme}/>
       <SortableListView
         style={styles.maxWidth}
         data={state.lists[0].contents}
