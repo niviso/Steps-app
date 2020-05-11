@@ -3,7 +3,9 @@ import {NewPlayerObj} from '../engine/boilerPlates';
 const PlayerContext = React.createContext([{}, () => {}]);
 
 const PlayerProvider = (props) => {
-  const [playerState, setPlayerState] = useState(NewPlayerObj());
+  const [playerState, setPlayerState] = useState({
+    view: 'default'
+  });
   return (
     <PlayerContext.Provider value={[playerState, setPlayerState]}>
       {props.children}

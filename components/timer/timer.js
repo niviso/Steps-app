@@ -24,7 +24,7 @@ function Timer(props){
 
     if(tmp.seconds <= 0 && tmp.minutes <= 0 && tmp.hours <= 0){
       CompleteItem(id);
-      PushNotificationHelper.sendPushNotification("Wow","amazing");
+      PushNotificationHelper.sendPushNotification("Step app","Ready to move over to the next step!");
       return tmp;
     }
 
