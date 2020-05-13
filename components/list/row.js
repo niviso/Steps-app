@@ -67,10 +67,10 @@ export default function Row(props) {
       {data.text}
       </Text>
       )}
-      {data.type == 'timer' && active && (
+      {data.type == 'timer' && active && !edit && (
       <Timer active={active} data={data} CompleteItem={CompleteItem}/>
       )}
-      {data.type == 'timer' && !active && (
+      {data.type == 'timer' && (!active || edit) && (
         <Text style={{color:'white',...styles.text,textDecorationLine:  data.complete && !edit ? 'line-through' : 'none',fontWeight: active ? 'bold' : 'normal'}}>
         {data.time}min
         </Text>
