@@ -9,26 +9,26 @@ export default function popup(props){
   const {onSubmit,onCancel,heading="No heading",data={text: null,time: null}} = props;
   const [text, setText] = React.useState(data.text);
   const [time,setTime] = useState(data.time);
-  const [showTime,setShowTime] = useState(false);
   const [type,setType] = useState(data.type ? data.type : 'text');
   HandleTime = (e) =>{
     setShowTime(false);
     setTime(e.toString());
   }
   Submit = () => {
-    if(!text){
+    if(!text && type == 'text'){
       alert("Set text");
       return;
     }
-    if(!time){
+    if(!time && type == 'timer'){
       alert("Set time!");
       return;
     }
-    if(time && time < 0){
+    if(time && time <= 0 && type == 'timer'){
       alert("Time cant be < 0");
       return;
     }
-    onSubmit(text,time);
+    console.log(text,time,type);
+    onSubmit(text,time,type);
 
   }
   const placeholder = {
@@ -59,15 +59,15 @@ export default function popup(props){
       <TextInput
         autoFocus
         style={styles.input}
-        onChangeText={text => setText(text)}
-        value={text}
-        onSubmitEditing={() => onSubmit(text)}
+        onChangeText={time => setTime(time)}
+        value={time}
+        onSubmitEditing={() => onSubmit(time)}
         keyboardType='number-pad'
       />
     </View>
     )}
     <TouchableOpacity onPress={() => type == 'timer' ? setType('text') : setType('timer') } style={{padding: 10,backgroundColor: 'red'}}>
-      <Text>Toggle</Text>
+      <Text>Convert to {type == 'timer' ? 'text' : 'timer'}</Text>
     </TouchableOpacity>
     <View style={styles.buttonWrapper}>
 

@@ -25,9 +25,10 @@ function List(props){
     tmp.lists[0].lastAction = action;
     setState(tmp);
   }
-  AddStep = (input,time) => {
+  AddStep = (input,time,type) => {
     var tmp = JSON.parse(JSON.stringify(state));
-    tmp.lists[0].contents.push({ id: Math.floor(Math.random() * 1000),text: input,draggable: true,time: time,timestamp: '14:13' })
+    tmp.lists[0].contents.push({ id: Math.floor(Math.random() * 1000),text: input,time: time,type:type,complete: false })
+
     tmp.lists[0].lastAction = 'add';
     setState(tmp);
     setShowInput(false);

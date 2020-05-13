@@ -51,7 +51,6 @@ export default function Row(props) {
         }}
       />
       )}
-      {data.draggable && (
         <TouchableHighlight
           underlayColor={'#fff'}
           style={styles.dragHandler}
@@ -61,7 +60,6 @@ export default function Row(props) {
           <Text><FontAwesome  name="bars"  size={20} /></Text>
           </SimpleAnimation>
         </TouchableHighlight>
-      )}
 
       <TouchableOpacity style={{...styles.TextBox, display: 'flex',flexDirection: 'row'}} onPress={() => edit ? editFunc(data.id) : CompleteItem(data.id,data.type)}>
       {data.type == 'text' &&  (
@@ -78,17 +76,13 @@ export default function Row(props) {
         </Text>
       )}
       </TouchableOpacity>
-      {data.draggable && (
         <TouchableHighlight underlayColor={'#fff'} activeOpacity={1.0} onPress={(e) => FilterState(data)} style={styles.dragHandler}>
         <SimpleAnimation friction={4} animateOnUpdate={lastAction == 'toggle' ? true : false} duration={500} distance={10} staticType="zoom" movementType="spring" aim={edit ? "in" : "out"} direction="left">
           {edit &&(
           <Text><FontAwesome  name="trash"  size={20} /></Text>
           )}
           </SimpleAnimation>
-
         </TouchableHighlight>
-
-      )}
     </View>
   </View>
 
