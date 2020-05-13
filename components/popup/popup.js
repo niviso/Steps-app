@@ -24,6 +24,10 @@ export default function popup(props){
       alert("Set time!");
       return;
     }
+    if(time && time < 0){
+      alert("Time cant be < 0");
+      return;
+    }
     onSubmit(text,time);
 
   }
@@ -37,7 +41,8 @@ export default function popup(props){
     <View style={styles.container}>
     <SimpleAnimation duration={500} staticType="zoom" style={styles.innerContainer}>
     <Text style={styles.headingText}>{heading}</Text>
-    <View style={{display: type == 'text' || data.type == 'text' ? 'block' : 'none'}}>
+    {type == 'text' && (
+    <View>
       <Text style={styles.label}>Label</Text>
       <TextInput
         autoFocus
@@ -47,27 +52,26 @@ export default function popup(props){
         onSubmitEditing={() => onSubmit(text)}
       />
     </View>
-    <View style={{display: type == 'timer' || data.type == 'timer' ? 'block' : 'none'}}>
-    <Text style={styles.label}>Set timer</Text>
-    <RNPickerSelect
-    onValueChange={(value) => HandleTime(value)}
-    style={{
-      inputAndroid: {
-        ...styles.picker
-      },
-      inputIOS: {
-        ...styles.picker
-      }
-    }}
-    placeholder={placeholder}
-    items={[
-        { label: 'Now', value: 'Now' },
-        { label: 'In 30 min', value: 'baseball' },
-        { label: 'In 1h', value: 'hockey' },
-    ]}
-    />
+    )}
+    {type == 'timer' && (
+    <View>
+      <Text style={styles.label}>Set timer</Text>
+      <TextInput
+        autoFocus
+        style={styles.input}
+        onChangeText={text => setText(text)}
+        value={text}
+        onSubmitEditing={() => onSubmit(text)}
+        keyboardType='number-pad'
+      />
     </View>
+    )}
+    <TouchableOpacity onPress={() => type == 'timer' ? setType('text') : setType('timer') } style={{padding: 10,backgroundColor: 'red'}}>
+      <Text>Toggle</Text>
+    </TouchableOpacity>
     <View style={styles.buttonWrapper}>
+
+
     <TouchableOpacity style={styles.cancelButton} onPress={() => onCancel()}>
     <Text style={styles.buttonText}>Cancel</Text>
     </TouchableOpacity>
