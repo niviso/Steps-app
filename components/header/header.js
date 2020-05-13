@@ -4,11 +4,11 @@ import { View,Text,SafeAreaView } from 'react-native';
 import styles from './style.scss';
 
 export default function Header(props){
-  const {theme} = props;
+  const {theme,text='No header'} = props;
 
   return(
     <SafeAreaView style={{backgroundColor: theme.primary,...styles.heading}} >
-      <Text style={{color: theme.contrast,...styles.headingText}}>Surdegsbröd</Text>
+      <Text style={{color: theme.contrast,...styles.headingText}}>{text}</Text>
     </SafeAreaView>
 
   )

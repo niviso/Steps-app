@@ -8,7 +8,7 @@ import { View,TouchableOpacity,NativeModules,Text  } from 'react-native';
 export default function defaultView(props){
   return(
     <View>
-      <Overview/>
+      <List/>
     </View>
   )
 

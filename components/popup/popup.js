@@ -10,6 +10,7 @@ export default function popup(props){
   const [text, setText] = React.useState(data.text);
   const [time,setTime] = useState(data.time);
   const [showTime,setShowTime] = useState(false);
+  const [type,setType] = useState(data.type ? data.type : 'text');
   HandleTime = (e) =>{
     setShowTime(false);
     setTime(e.toString());
@@ -30,20 +31,24 @@ export default function popup(props){
   label: 'Set time...',
   value: null,
   color: '#fafafa',
-};
+  };
+
   return(
     <View style={styles.container}>
     <SimpleAnimation duration={500} staticType="zoom" style={styles.innerContainer}>
     <Text style={styles.headingText}>{heading}</Text>
-    <Text style={styles.label}>Label</Text>
-    <TextInput
-      autoFocus
-      style={styles.input}
-      onChangeText={text => setText(text)}
-      value={text}
-      onSubmitEditing={() => onSubmit(text)}
-    />
-    <Text style={styles.label}>Set time</Text>
+    <View style={{display: type == 'text' || data.type == 'text' ? 'block' : 'none'}}>
+      <Text style={styles.label}>Label</Text>
+      <TextInput
+        autoFocus
+        style={styles.input}
+        onChangeText={text => setText(text)}
+        value={text}
+        onSubmitEditing={() => onSubmit(text)}
+      />
+    </View>
+    <View style={{display: type == 'timer' || data.type == 'timer' ? 'block' : 'none'}}>
+    <Text style={styles.label}>Set timer</Text>
     <RNPickerSelect
     onValueChange={(value) => HandleTime(value)}
     style={{
@@ -61,6 +66,7 @@ export default function popup(props){
         { label: 'In 1h', value: 'hockey' },
     ]}
     />
+    </View>
     <View style={styles.buttonWrapper}>
     <TouchableOpacity style={styles.cancelButton} onPress={() => onCancel()}>
     <Text style={styles.buttonText}>Cancel</Text>

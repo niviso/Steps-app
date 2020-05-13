@@ -72,7 +72,7 @@ function List(props){
 
     return (
       <View style={styles.container}>
-      <Header theme={state.lists[0].theme}/>
+      <Header theme={state.lists[0].theme} text={state.lists[0].name} />
       <SortableListView
         style={styles.maxWidth}
         data={state.lists[0].contents}
