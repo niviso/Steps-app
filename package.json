@@ -10,7 +10,7 @@
   "dependencies": {
     "@react-native-community/datetimepicker": "2.2.2",
     "expo": "^37.0.7",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "node-sass": "^4.13.1",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
